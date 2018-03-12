@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/images/favicon.ico">
+    <title>Blog Template for Bootstrap</title>
+    <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="/stylesheets/blog.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="blog-masthead">
+    <div class="container">
+        <nav class="blog-nav">
+            <a class="blog-nav-item active" href="/">首页</a>
+            <a class="blog-nav-item" href="#">关于</a>
+            <a class="blog-nav-item" href="#">联系</a>
+            <a class="blog-nav-item pull-right" href="/register">点击成为贡献者</a>
+        </nav>
+    </div>
+</div>
+
+<div class="container" style="margin-top: 20px;">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title" style="font-size:20px;font-weight:bold;text-align: center;"><%= list.title%></h3>
+            </div>
+            <div class="panel-body" style="height:100%">
+               <%- list.content%>
+            </div>
+        </div>
+    </div><!-- /.row -->
+</div><!-- /.container -->
+
+<footer class="blog-footer">
+    <p>Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+    <p>
+        <a href="#">Back to top</a>
+    </p>
+</footer>
+
+</body>
+</html>

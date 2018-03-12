@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="/images/favicon.ico">
+  <title>Blog Template for Bootstrap</title>
+  <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="/stylesheets/blog.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="blog-masthead">
+  <div class="container">
+    <nav class="blog-nav">
+      <a class="blog-nav-item active" href="/">首页</a>
+      <a class="blog-nav-item" href="#">关于</a>
+      <a class="blog-nav-item" href="#">联系</a>
+      <a class="blog-nav-item pull-right" href="/register">点击成为贡献者</a>
+    </nav>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="blog-header">
+    <h1 class="blog-title" style="font-size:40px;text-shadow:2px 0 3px #83d8f9 ">前端日刊</h1>
+    <p class="lead blog-description">专注于前端技能交流分享的免费的服务平台</p>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-8 blog-main">
+        <% for(var i=0;i<list.length;i++){%>
+      <div class="panel panel-default panel-info">
+        <div class="panel-heading ">
+          <h3 class="panel-title"><%= list[i].title%></h3>
+        </div>
+        <div class="panel-body">
+            <%- list[i].content%>
+        </div>
+        <p class="text-right"><a href="/detail/<%= list[i]._id%>">查看全文</></p>
+        <div class="panel-footer">
+          <span><i class="iconfont">&#xe629;</i>&nbsp;发布时间:<%= list[i].time%></span>
+          <a><i class="iconfont">&#xe688;</i>&nbsp;作者:<%= list[i].author%></a>
+          <a><i class="iconfont">&#xe7f9;</i>&nbsp;分类:<%= list[i].classify%></a>
+          <a><i class="iconfont">&#xe60d;</i>&nbsp;评论:<%= list[i].comment%></a>
+          <a class="likearticle" likeid="<%= list[i]._id%>"><i class="iconfont">&#xe683;</i>&nbsp;点赞:<span><%= list[i].like%></span></a>
+        </div>
+      </div>
+        <%}%>
+      <%if(isshow){%>
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li>
+                    <a href="/prev" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li><a href="#"><%= page%></a></li>
+                <li>
+                    <a href="/next" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+      <%}%>
+    </div><!-- /.blog-main -->
+
+    <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+      <div class="sidebar-module">
+        <h4>文章分类</h4>
+        <ol class="list-unstyled">
+          <li><a href="/html">HTML</a></li>
+          <li><a href="/js">JavaScript</a></li>
+          <li><a href="/css">Css</a></li>
+          <li><a href="/mobile">移动端</a></li>
+          <li><a href="/frame">框架</a></li>
+          <li><a href="/other">其他</a></li>
+        </ol>
+      </div>
+      <div class="sidebar-module">
+        <h4>友情链接</h4>
+        <ol class="list-unstyled">
+          <li><a href="#">GitHub</a></li>
+          <li><a href="#">Twitter</a></li>
+          <li><a href="#">Facebook</a></li>
+        </ol>
+      </div>
+    </div><!-- /.blog-sidebar -->
+
+  </div><!-- /.row -->
+
+</div><!-- /.container -->
+
+<footer class="blog-footer">
+  <p>Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+  <p>
+    <a href="#">Back to top</a>
+  </p>
+</footer>
+<script type="text/javascript" src="/bootstrap/js/jquery-1.11.0.js"></script>
+<script>
+
+    $('.likearticle').on('click',function(){
+        var num = Number($(this).find('span').html());
+        num++;
+        $(this).find('span').html(num);
+        $.ajax({
+            url:'/like',
+            type:'GET',
+            data:{num:num,id:$(this).attr('likeid')}
+        });
+        $(this).off();
+    })
+</script>
+</body>
+</html>
